@@ -7,7 +7,7 @@ namespace ExplorerNotepad.Models
         public Directories(string Name) : base(Name)
         {
             SourceName = Name;
-            Image = "Assets/iconFolder.png";
+            Image = "Assets/iconBackFolder.png";
         }
 
         public Directories(DirectoryInfo directoryName) : base(directoryName.Name)

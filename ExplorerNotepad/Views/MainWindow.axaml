@@ -28,7 +28,7 @@
 		</Grid.ColumnDefinitions>
 
 		<StackPanel Name="explorerWindow" IsVisible="True">
-			<ListBox Name="fileListBox" SelectedIndex="{Binding currentIndexProperties}" DoubleTapped="DoubleTap" Items="{Binding ExplorerCollectionProperties, Mode=OneWay}" Width="400" Height="600">
+			<ListBox Name="fileListBox" Background="#20252b" SelectedIndex="{Binding currentIndexProperties}" DoubleTapped="DoubleTap" Items="{Binding ExplorerCollectionProperties, Mode=OneWay}" Width="400" Height="600">
 				<ListBox.ItemTemplate>
 					<DataTemplate DataType="{x:Type locc:Explorer}">
 						<Grid ColumnDefinitions="30*, 70*">
@@ -39,14 +39,10 @@
 				</ListBox.ItemTemplate>
 			</ListBox>
 			<TextBox Name="fileTextBox" Text="{Binding outTextFolderProperties, Mode=TwoWay}" Width="400" Height="50" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-			<Grid ColumnDefinitions="50*,50*">
-				<Button Name="okButton" Command="{Binding clickButton}" Content="{Binding saveButtonTextProperties, Mode=OneWay}" IsVisible="{Binding VisibilityExplorer}" Grid.Column="0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" Height="50" Width="200"/>
-				<Button Name="cancelButton" Command="{Binding returnBack}" Grid.Column="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Right" Height="50" Width="200" Content="Отмена"/>
-			</Grid>
 		</StackPanel>
 
 		<!-- Ваш добавленный код начинается здесь -->
-		<StackPanel Grid.Column="1" Background="LightGray" Width="500">
+		<StackPanel Grid.Column="1" Background="#353c4d" Width="500">
 			<Image x:Name="imagePreview" Source="{Binding ImagePreview}" Stretch="Uniform"/>
 		</StackPanel>
 
