@@ -78,7 +78,29 @@ namespace ExplorerNotepad.ViewModels
             }
             else
             {
-                // Logic for opening a file goes here
+                // Логика открытия файла
+                var selectedExplorer = ExplorerCollection[currentIndexProperties];
+                var imageExtensions = new[] { ".png", ".ico", "jpg", "dmp", "gif" };
+
+                // Проверка, является ли выбранный элемент файлом
+                if (selectedExplorer is Files file)
+                {
+                    // Проверка, является ли файл изображением
+                    if (imageExtensions.Contains(Path.GetExtension(file.SourceName), StringComparer.OrdinalIgnoreCase))
+                    {
+                        // Загрузка изображения
+                        var imagePath = Path.Combine(currentPath, file.SourceName);
+                        var image = new Bitmap(imagePath);
+
+                        // Установка предварительного просмотра изображения
+                        ImagePreview = image;
+
+                        // Очистка текста и установка видимости
+                        outTextFolderProperties = "";
+                        VisibilityExplorerProperties = true;
+                        currentIndexProperties = 0;
+                    }
+                }
             }
         }
 
@@ -119,36 +141,7 @@ namespace ExplorerNotepad.ViewModels
 
         public void DoubleTap()
         {
-            var selectedExplorer = ExplorerCollectionProperties[currentIndexProperties];
-            var imageExtensions = new[] { ".png", ".ico", "jpg", "dmp", "gif" };
-
-            // Check if the selected item is a file
-            if (selectedExplorer is Files file)
-            {
-                // Check if the file is a PNG
-                if (imageExtensions.Contains(Path.GetExtension(file.SourceName), StringComparer.OrdinalIgnoreCase))
-                {
-                    // Load the image
-                    var imagePath = Path.Combine(currentPath, file.SourceName);
-                    var image = new Bitmap(imagePath);
-
-                    // Set the image preview
-                    ImagePreview = image;
-
-                    // Clear text and set visibility
-                    outTextFolderProperties = "";
-                    VisibilityExplorerProperties = true;
-                    currentIndexProperties = 0;
-                }
-                else
-                {
-                    openExplorer();
-                }
-            }
-            else
-            {
-                openButton_openRegime();
-            }
+            openButton_openRegime();
         }
     }
 }

@@ -10,7 +10,7 @@
         CanResize="False"
         x:Class="ExplorerNotepad.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
-        Icon="/Assets/iconNotePad.ico"
+        Icon="/Assets/avalonia-logo.ico"
         Title="Explorer">
 
 	<Design.DataContext>
