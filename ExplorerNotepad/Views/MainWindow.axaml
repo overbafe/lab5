@@ -1,0 +1,54 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:ExplorerNotepad.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:locc="clr-namespace:ExplorerNotepad.Models"
+        mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="600"
+        Width="400" Height="600"
+        SizeToContent="Width"
+        CanResize="False"
+        x:Class="ExplorerNotepad.Views.MainWindow"
+        x:DataType="vm:MainWindowViewModel"
+        Icon="/Assets/iconNotePad.ico"
+        Title="Explorer">
+
+	<Design.DataContext>
+		<vm:MainWindowViewModel/>
+	</Design.DataContext>
+
+	<Window.Resources>
+		<vm:ImageConverter x:Key="imageConvert"/>
+	</Window.Resources>
+
+	<Grid>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="*" />
+			<ColumnDefinition Width="Auto" />
+		</Grid.ColumnDefinitions>
+
+		<StackPanel Name="explorerWindow" IsVisible="True">
+			<ListBox Name="fileListBox" SelectedIndex="{Binding currentIndexProperties}" DoubleTapped="DoubleTap" Items="{Binding ExplorerCollectionProperties, Mode=OneWay}" Width="400" Height="600">
+				<ListBox.ItemTemplate>
+					<DataTemplate DataType="{x:Type locc:Explorer}">
+						<Grid ColumnDefinitions="30*, 70*">
+							<Image Margin="0 0 100 0" Width="50" Height="50" Source="{Binding Image, Converter={StaticResource imageConvert}}"/>
+							<TextBlock Padding="15" Grid.Column="1" TextAlignment="Left" Width="400" Height="50" Text="{Binding Header}"/>
+						</Grid>
+					</DataTemplate>
+				</ListBox.ItemTemplate>
+			</ListBox>
+			<TextBox Name="fileTextBox" Text="{Binding outTextFolderProperties, Mode=TwoWay}" Width="400" Height="50" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+			<Grid ColumnDefinitions="50*,50*">
+				<Button Name="okButton" Command="{Binding clickButton}" Content="{Binding saveButtonTextProperties, Mode=OneWay}" IsVisible="{Binding VisibilityExplorer}" Grid.Column="0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" Height="50" Width="200"/>
+				<Button Name="cancelButton" Command="{Binding returnBack}" Grid.Column="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Right" Height="50" Width="200" Content="Отмена"/>
+			</Grid>
+		</StackPanel>
+
+		<!-- Ваш добавленный код начинается здесь -->
+		<StackPanel Grid.Column="1" Background="LightGray" Width="500">
+			<Image x:Name="imagePreview" Source="{Binding ImagePreview}" Stretch="Uniform"/>
+		</StackPanel>
+
+	</Grid>
+</Window>
